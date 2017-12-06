@@ -4,8 +4,8 @@ namespace Utm\Controller;
 class TotoController extends \Utm\CoreController
 {    
     public function index() {
-//        $form = coreModel::factory('form');
-//        var_dump($form);
+        $App = \Utm\CoreModel::factory('App');
+        var_dump($App->getProductList());
         echo 'toto::index';
     }
 }

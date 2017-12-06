@@ -51,7 +51,7 @@ class CoreLoader
      */
     public static function Model($class)
     {
-        $nameSpace = 'Utm\\Library\\';
+        $nameSpace = 'Utm\\Model\\';
         $baseDir = \Utm\Core::$config['path']['model'];
 
         self::LoadClass($nameSpace, $baseDir, $class);

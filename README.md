@@ -1,7 +1,7 @@
 UTM framework v2
 ========================
 
-Réecriture du framework php UTM [**Projet**][1] en php 7.2.
+Réecriture du framework php [**UTM**][1] en php 7.2.
 
 Objectif principaux
 -------------------
