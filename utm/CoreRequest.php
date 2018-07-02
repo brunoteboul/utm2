@@ -23,7 +23,7 @@ class CoreRequest extends \Utm\CoreComponent
     public function __construct(array $p_aReqElement)
     {
         $this->m_aReqElement = array_flip($p_aReqElement);
-        
+
         if (PHP_SAPI=='cli') {
             $this->m_sRequestType =self::CLI;
         } else if(true == $this->isAjax()) {
@@ -35,7 +35,7 @@ class CoreRequest extends \Utm\CoreComponent
         $this->m_sController = core::$config['request']['default'];
         $this->m_sAction = core::$config['request']['default'];
     }
-    
+
     protected function isAjax()
     {
         return !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && preg_match('#xmlhttprequest#i', $_SERVER['HTTP_X_REQUESTED_WITH']);
@@ -84,7 +84,7 @@ class CoreRequest extends \Utm\CoreComponent
 
         // On parcours le tableau afin d'y retrouver les clés definies en config
         foreach ($this->m_aReqElement AS $key => $value) {
-            if (true == array_key_exists($key, $l_aQuery) 
+            if (true == array_key_exists($key, $l_aQuery)
                 && true == is_string($l_aQuery[$key])) {
                 if ('module' == $value) {
                     $this->m_sModule = strip_tags($l_aQuery[$key]);
@@ -149,11 +149,11 @@ class CoreRequest extends \Utm\CoreComponent
             'post'=> 'm_aPost',
             'cli' => 'm_aCli',
         ];
-        
+
         if (false == isset($l_aInputs[$p_sElement])) {
-            throw New exception('Invalid method request'); 
+            throw New \Exception('Invalid method request'); 
         }
-        
+
         $l_sMethod = $l_aInputs[strtolower($p_sElement)];
         if (true == isset($this->$l_sMethod)) {
             return $this->$l_sMethod;

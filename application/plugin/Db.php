@@ -21,10 +21,10 @@ class Db extends \Utm\CorePlugin
         $this->m_oDb = new \mysqli($this->m_aConf['host'], $this->m_aConf['username'], $this->m_aConf['passwd'], $this->m_aConf['dbname'], $this->m_aConf['port']);
         //definition du charset de la connexion
         if (!$this->m_oDb->set_charset($this->m_aConf['charset'])) {
-            throw new Exception('Le jeu de caractère \'' . $this->m_aConf['charset'] . '\' n\'a pas pu etre defini pour la connexion à la base (Valeur courante :utf8, latin1, etc.) : ' . __METHOD__);
+            throw new \Exception('Le jeu de caractère \'' . $this->m_aConf['charset'] . '\' n\'a pas pu etre defini pour la connexion à la base (Valeur courante :utf8, latin1, etc.) : ' . __METHOD__);
         }
     }
-    
+
     /**
      * destructeur
      */
@@ -32,13 +32,13 @@ class Db extends \Utm\CorePlugin
     {
         $this->m_oDb->close();
     }
-    
+
     /**
      * Lance une requete
      * @param string $p_rSql Requete
      * @return array Tableau de resultats
      */
-    public function query($p_rSql) 
+    public function query($p_rSql)
     {
         $this->m_oResult = $this->m_oDb->query($p_rSql);
         $this->m_aRequest[] = $p_rSql;
@@ -53,10 +53,10 @@ class Db extends \Utm\CorePlugin
             $this->m_iRequestNb++;
             return $return;
         } else {
-            throw new Exception('Classe DB : erreur sql "'.$p_rSql.'" : ' . __METHOD__);
+            throw new \Exception('Classe DB : erreur sql "'.$p_rSql.'" : ' . __METHOD__);
         }
     }
-    
+
     /**
      * Lance une requete et recupere la premiere ligne
      * @param string $p_rSql Requete
@@ -70,10 +70,10 @@ class Db extends \Utm\CorePlugin
             $this->m_iRequestNb++;
             return $this->m_oResult->fetch_object();
         } else {
-            throw new Exception('Classe DB : erreur sql : ' . __METHOD__);
+            throw new \Exception('Classe DB : erreur sql : ' . __METHOD__);
         }
     }
-    
+
     /**
      * Lance une requete et recupere la premiere ligne
      * @param string $p_rSql Requete
@@ -87,10 +87,10 @@ class Db extends \Utm\CorePlugin
             $this->m_iRequestNb++;
             return $this->m_oResult->fetch_array(MYSQLI_ASSOC);
         } else {
-            throw new Exception('Classe DB : erreur sql : ' . __METHOD__);
+            throw new \Exception('Classe DB : erreur sql : ' . __METHOD__);
         }
     }
-    
+
     /**
      * Lance une requete et recupere le premier enregistrement de la
      * premiere ligne.
@@ -106,10 +106,10 @@ class Db extends \Utm\CorePlugin
             $row = $this->m_oResult->fetch_row();
             return $row[0];
         } else {
-            throw new Exception('Classe DB : erreur sql "'.$p_rSql.'" : ' . __METHOD__);
+            throw new \Exception('Classe DB : erreur sql "'.$p_rSql.'" : ' . __METHOD__);
         }
     }
-    
+
     /**
      * Renvoi le dernier id inséré en base
      */
@@ -117,7 +117,7 @@ class Db extends \Utm\CorePlugin
     {
         return $this->m_oDb->insert_id;
     }
-    
+
     /**
      * Renvoi le nombre d'enregistrement dans le resultat de la requete
      */
@@ -125,7 +125,7 @@ class Db extends \Utm\CorePlugin
     {
         return $this->m_oResult->num_rows;
     }
-    
+
     /**
      * Encrypte un chaine selon un hash MD5 ou SHA1 auquel une graine à été
      * ajouté.
@@ -142,7 +142,7 @@ class Db extends \Utm\CorePlugin
             return MD5($this->m_aConf['seed'].$p_sString);
         }
     }
-    
+
     /**
      * Echappe une chaine de caractère
      * @param string $p_sString Chaine à échapper
